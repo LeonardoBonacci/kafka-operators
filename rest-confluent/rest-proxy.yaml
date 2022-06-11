@@ -1,0 +1,20 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaRestProxy
+metadata:
+  name: kafkarestproxy
+  namespace: confluent
+spec:
+  dependencies:
+    kafka:
+      bootstrapEndpoint: ...us-central1.gcp.confluent.cloud:9092
+      authentication:
+        type: plain
+        jaasConfig:
+          secretRef: rp-secret
+      tls:
+        enabled: true
+        ignoreTrustStoreConfig: true
+  image:
+    application: confluentinc/cp-kafka-rest:7.1.0
+    init: confluentinc/confluent-init-container:2.3.0
+  replicas: 3
