@@ -1,4 +1,4 @@
-# kafka-operators
+# Rest Proxy
 
 thanks to https://github.com/confluentinc/confluent-kubernetes-examples/blob/master/hybrid/ccloud-integration/confluent-platform.yaml
 
@@ -8,7 +8,10 @@ kubectl explain kafkarestproxies.platform.confluent.io.spec.dependencies.kafka.a
 kubectl create ns confluent
 kubectl config set-context --current --namespace confluent
 
-kubectl create secret generic rp-secret --from-file=plain.txt -n confluent
+
+kubectl create secret generic cloud-plain \
+  --from-file=plain.txt=creds-client-kafka-sasl-user.txt
+
 
 
 kubectl port-forward service/kafkarestproxy 8082:8082 -n confluent

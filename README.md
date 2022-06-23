@@ -1,1 +1,1 @@
-# kafka-operators
+# Strimzi Rest Proxy

@@ -1,0 +1,21 @@
+---
+apiVersion: platform.confluent.io/v1beta1
+kind: Connector
+metadata:
+  name: cosmos-source
+  namespace: confluent
+spec:
+  class: "com.mongodb.kafka.connect.MongoSourceConnector"
+  taskMax: 1
+  connectClusterRef:
+    name: connect
+  configs:
+    key.converter: "org.apache.kafka.connect.json.JsonConverter"
+    key.converter.schemas.enable": "false"
+    value.converter: "org.apache.kafka.connect.json.JsonConverter"
+    value.converter.schemas.enable": "false"
+    connection.uri: "mongodb://user:password==@kco.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@foo@"
+    database: "foo"
+    collection: "bar"
+    publish.full.document.only: "true"
+    pipeline: "[{$match:{\"operationType\":{$in:[\"insert\",\"update\",\"replace\"]}}},{$project:{\"_id\":1,\"fullDocument\":1,\"ns\":1,\"documentKey\":1}}]"
