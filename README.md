@@ -1,1 +1,1 @@
-# Strimzi Rest Proxy
+# Strimzi and Confluent k8s operators
